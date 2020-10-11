@@ -2,7 +2,6 @@ import 'package:StorageTests/data/interfaces/task_repository_interface.dart';
 import 'package:StorageTests/hive_impl/hive_task_repository.dart';
 import 'package:StorageTests/hive_impl/models/task_hive_model.dart';
 import 'package:StorageTests/widgets/task_app.dart';
-import 'package:StorageTests/widgets/task_list.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';

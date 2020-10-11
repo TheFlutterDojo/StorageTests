@@ -33,6 +33,15 @@ class _TaskAppState extends State<TaskApp> {
     return added;
   }
 
+  Future<void> onDeleteTask(Task task) async {
+    var result = await widget.taskRepository.deleteTask(task);
+    if (result) {
+      setState(() {
+        taskFuture = widget.taskRepository.getAllTasks();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -47,7 +56,10 @@ class _TaskAppState extends State<TaskApp> {
           return Column(
             children: [
               AddTaskInput(onTaskAdded: addTask),
-              TaskList(tasks: snapshot.data),
+              TaskList(
+                tasks: snapshot.data,
+                onDeleteTask: onDeleteTask,
+              ),
             ],
           );
         });

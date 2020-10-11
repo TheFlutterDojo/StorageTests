@@ -17,4 +17,15 @@ class HiveTaskRepository implements ITaskRepository {
 
     return id >= 0;
   }
+
+  @override
+  Future<bool> deleteTask(Task task) async {
+    var box = await Hive.openBox<TaskHiveModel>("tasks");
+    try {
+      await box.delete(task.id);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
 }

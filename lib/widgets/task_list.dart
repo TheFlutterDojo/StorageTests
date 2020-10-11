@@ -1,11 +1,13 @@
-import 'package:StorageTests/data/interfaces/task_repository_interface.dart';
 import 'package:StorageTests/data/models/task.dart';
 import 'package:flutter/material.dart';
 
+typedef Future<void> DeleteTaskFunction(Task task);
+
 class TaskList extends StatelessWidget {
   final List<Task> tasks;
+  final DeleteTaskFunction onDeleteTask;
 
-  TaskList({this.tasks});
+  TaskList({this.tasks, this.onDeleteTask});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,10 @@ class TaskList extends StatelessWidget {
   Widget _renderTask(BuildContext context, Task task) {
     return ListTile(
       title: Text(task.text),
+      trailing: IconButton(
+        icon: Icon(Icons.delete),
+        onPressed: () => onDeleteTask(task),
+      ),
     );
   }
 }
