@@ -16,6 +16,7 @@ class TaskList extends StatelessWidget {
     return ListView.builder(
       itemBuilder: (context, idx) => _renderTask(context, tasks[idx]),
       itemCount: tasks.length,
+      shrinkWrap: true,
     );
   }
 

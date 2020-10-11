@@ -1,5 +1,6 @@
 import 'package:StorageTests/data/interfaces/task_repository_interface.dart';
 import 'package:StorageTests/hive_impl/hive_task_repository.dart';
+import 'package:StorageTests/hive_impl/models/task_hive_model.dart';
 import 'package:StorageTests/widgets/task_app.dart';
 import 'package:StorageTests/widgets/task_list.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class _HiveScreenState extends State<HiveScreen> {
 
   Future<ITaskRepository> loadHive() async {
     await Hive.initFlutter();
+    Hive.registerAdapter(TaskHiveModelAdapter());
     return new HiveTaskRepository();
   }
 

@@ -1,5 +1,6 @@
 import 'package:StorageTests/data/interfaces/task_repository_interface.dart';
 import 'package:StorageTests/data/models/task.dart';
+import 'package:StorageTests/widgets/add_task_input.dart';
 import 'package:StorageTests/widgets/task_list.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,17 @@ class _TaskAppState extends State<TaskApp> {
     super.initState();
   }
 
+  Future<bool> addTask(String taskText) async {
+    var added = await widget.taskRepository.addTask(taskText);
+    if (added) {
+      setState(() {
+        taskFuture = widget.taskRepository.getAllTasks();
+      });
+    }
+
+    return added;
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -32,7 +44,12 @@ class _TaskAppState extends State<TaskApp> {
             );
           }
 
-          return TaskList(tasks: snapshot.data);
+          return Column(
+            children: [
+              AddTaskInput(onTaskAdded: addTask),
+              TaskList(tasks: snapshot.data),
+            ],
+          );
         });
   }
 }
